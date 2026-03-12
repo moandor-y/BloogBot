@@ -43,14 +43,10 @@ namespace TestBot
         {
             ThreadSynchronizer.RunOnMainThread(() =>
             {
-                {
-                    Console.WriteLine(Functions.LuaCallWithResult(@"
-                        {0} = RealmList:IsShown()
-                        if {0} then
-                            RealmList_OnOk()
-                        end
-                    ")[0]);
-                }
+                WoWUnit target = ObjectManager
+                    .Units
+                    .Single(u => u.Guid == ObjectManager.Player.TargetGuid);
+                target.Interact();
             });
         }
     }
